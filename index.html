@@ -3,138 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fly Emirates — Билеты онлайн (flex + BEM)</title>
-  <style>
-    :root{
-      --burgundy:#a80000;
-      --burgundy-dark:#800000;
-      --bg:#f6f6f6;
-      --card:#ffffff;
-      --text:#2b2b2b;
-      --muted:#6b6b6b;
-      --maxw:1200px;
-      --radius:12px;
-      --shadow:0 6px 18px rgba(0,0,0,.06);
-      --shadow-lg:0 10px 30px rgba(0,0,0,.08);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
-    img{max-width:100%; display:block}
-    .wrapper{max-width:var(--maxw); margin:0 auto; padding:18px}
+  <title>Fly Emirates — Билеты онлайн</title>
 
-    /* HEADER */
-    .header {
-      display:flex; align-items:center; justify-content:space-between;
-      background:var(--card); border-radius:10px; box-shadow:var(--shadow);
-      margin-bottom:18px; padding:14px 18px;
-    }
-    .header__logo {display:flex; align-items:center;}
-    .header__logo-img {
-      width:46px; height:46px; border-radius:8px; object-fit:cover;
-      margin-right:12px; border:1px solid rgba(0,0,0,.06);
-    }
-    .header__brand {margin:0; color:var(--burgundy); font-weight:700; font-size:18px;}
-    .header__nav ul {display:flex; gap:18px; margin:0; padding:0; list-style:none;}
-    .header__nav a {
-      color:var(--muted); text-decoration:none; font-weight:600; font-size:14px;
-      padding:8px 6px; border-radius:8px; transition:color .18s, background .18s;
-    }
-    .header__nav a:hover {color:var(--burgundy); background:rgba(168,0,0,.06);}
-
-    /* HERO */
-    .hero {
-      position:relative; margin:10px 0 18px; border-radius:12px; overflow:hidden;
-      box-shadow:var(--shadow-lg); height:420px; background:#000;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .hero__img {position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
-    .hero__overlay {position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.5));}
-    .hero__title {
-      position:relative; color:#fff; font-size:34px; margin:0; text-align:center;
-      text-shadow:0 2px 10px rgba(0,0,0,.25);
-    }
-
-    /* SEARCH */
-    .search {
-      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
-      padding:18px; border-radius:12px; box-shadow:var(--shadow);
-    }
-    .search__form {display:flex; flex-wrap:wrap; gap:12px;}
-    .search__col {flex:1 1 calc(33.333% - 12px); min-width:200px;}
-    .search__label {display:block; font-size:12px; color:var(--muted); margin-bottom:6px;}
-    .search__field, .search__chip {background:#fff; border-radius:10px;}
-    .search__field input, .search__field select {
-      width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e0e0e0;
-      background:#fff; font-size:14px; color:var(--text);
-    }
-    .search__chip input, .search__chip select {
-      width:100%; padding:10px 14px; border:0; outline:0;
-      background:var(--burgundy); color:#fff; font-weight:600; font-size:14px;
-    }
-    .search__btn {display:flex; justify-content:flex-end; align-items:center; width:100%; margin-top:8px;}
-    .search__tiny {font-size:12px; color:var(--muted); margin-right:8px;}
-    .btn {
-      border:0; cursor:pointer; background:var(--burgundy); color:#fff; font-weight:700; font-size:15px;
-      padding:12px 16px; border-radius:10px; transition:transform .08s, box-shadow .18s, background .18s;
-      box-shadow:0 10px 20px rgba(168,0,0,.15);
-    }
-    .btn:hover {background:var(--burgundy-dark); transform:translateY(-2px); box-shadow:0 14px 26px rgba(168,0,0,.22);}
-
-    /* CARDS */
-    .cards {display:flex; flex-wrap:wrap; gap:16px;}
-    .card {flex:1 1 calc(33.333% - 16px); min-width:260px; background:#fafafa;
-      border-radius:10px; overflow:hidden; border:1px solid #f0f0f0;
-      transition: transform .16s, box-shadow .18s;}
-    .card:hover {transform:translateY(-6px); box-shadow:0 12px 24px rgba(0,0,0,.08);}
-    .card__img {width:100%; height:160px; object-fit:cover;}
-    .card__content {padding:12px;}
-    .card__title {margin:0 0 6px; color:var(--burgundy); font-size:16px;}
-    .card__text {margin:0; color:var(--muted); font-size:14px;}
-
-    /* COLUMNS */
-    .columns {display:flex; flex-wrap:wrap; gap:20px;}
-    .columns__col {flex:1 1 calc(33.333% - 20px); min-width:280px;}
-    .panel {background:#fff; border:1px solid #eee; border-radius:10px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,.04);}
-    .panel h3 {margin:0 0 10px; font-size:16px; color:#333;}
-    .panel ul {margin:0; padding-left:18px;}
-    .panel li {padding:6px 0; color:#555;}
-    .badge {display:inline-block; font-size:12px; padding:3px 8px; border-radius:999px; background:rgba(168,0,0,.08);
-      color:var(--burgundy); font-weight:700; margin-left:6px;}
-
-    /* FOOTER */
-    .footer {margin:26px 0 60px; text-align:center; color:var(--muted); font-size:14px;
-      padding:16px; background:#fff; border-radius:12px; box-shadow:var(--shadow);}
-
-    /* RESPONSIVE */
-    @media (max-width:980px){
-      .hero{height:300px}
-      .card{flex:1 1 calc(50% - 16px)}
-      .columns__col{flex:1 1 calc(50% - 20px)}
-    }
-    @media (max-width:560px){
-      .hero{height:220px}
-      .hero__title{font-size:22px}
-      .card{flex:1 1 100%}
-      .columns__col{flex:1 1 100%}
-      .search__btn{justify-content:flex-start}
-    }
-  </style>
+  <!-- Подключение стилей -->
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="hero.css">
+  <link rel="stylesheet" href="search.css">
+  <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="columns.css">
 </head>
 <body>
   <div class="wrapper">
+
     <!-- HEADER -->
-    <header class="header" role="banner">
+    <header class="header">
       <div class="header__logo">
         <img class="header__logo-img" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=80&q=80" alt="logo">
         <p class="header__brand">Fly Emirates</p>
       </div>
-      <nav class="header__nav" aria-label="Главная навигация">
+      <nav class="header__nav">
         <ul>
           <li><a href="#">Главная</a></li>
           <li><a href="#">Направления</a></li>
@@ -152,93 +39,79 @@
     </section>
 
     <!-- SEARCH -->
-    <section class="search" aria-label="Поиск билетов">
-      <form class="search__form" action="#" method="get" onsubmit="event.preventDefault(); alert('Форма отправлена (демо)')">
+    <section class="search">
+      <form class="search__form">
         <div class="search__col">
           <label class="search__label" for="from">Откуда</label>
-          <div class="search__field"><input id="from" name="from" type="text" placeholder="Алматы" required></div>
+          <div class="search__field"><input id="from" type="text" placeholder="Алматы"></div>
         </div>
         <div class="search__col">
           <label class="search__label" for="to">Куда</label>
-          <div class="search__field"><input id="to" name="to" type="text" placeholder="Дубай" required></div>
+          <div class="search__field"><input id="to" type="text" placeholder="Дубай"></div>
         </div>
         <div class="search__col">
           <label class="search__label" for="depart">Туда</label>
-          <div class="search__chip"><input id="depart" name="depart" type="date" required></div>
+          <div class="search__chip"><input id="depart" type="date"></div>
         </div>
         <div class="search__col">
           <label class="search__label" for="return">Обратно</label>
-          <div class="search__chip"><input id="return" name="return" type="date"></div>
+          <div class="search__chip"><input id="return" type="date"></div>
         </div>
         <div class="search__col">
           <label class="search__label" for="passengers">Пассажиры</label>
           <div class="search__chip">
-            <select id="passengers" name="passengers">
-              <option value="1">1 пассажир</option>
-              <option value="2">2 пассажира</option>
-              <option value="3">3 пассажира</option>
-              <option value="4">4 пассажира</option>
-              <option value="5">5 пассажиров</option>
+            <select id="passengers">
+              <option>1 пассажир</option>
+              <option>2 пассажира</option>
             </select>
           </div>
         </div>
         <div class="search__col">
           <label class="search__label" for="class">Класс</label>
           <div class="search__chip">
-            <select id="class" name="class">
-              <option value="economy">Эконом</option>
-              <option value="premium">Премиум-эконом</option>
-              <option value="business">Бизнес</option>
-              <option value="first">Первый</option>
+            <select id="class">
+              <option>Эконом</option>
+              <option>Бизнес</option>
             </select>
           </div>
         </div>
         <div class="search__btn">
-          <span class="search__tiny">Нажми, чтобы увидеть доступные рейсы (демо)</span>
-          <button class="btn" type="submit">Найти билеты</button>
+          <span class="search__tiny">Нажми, чтобы увидеть рейсы</span>
+          <button class="btn">Найти билеты</button>
         </div>
       </form>
     </section>
 
     <!-- CARDS -->
-    <section class="section" aria-labelledby="popular-heading">
-      <h2 id="popular-heading">Популярные направления</h2>
+    <section class="section">
+      <h2>Популярные направления</h2>
       <div class="cards">
         <article class="card">
-          <img class="card__img" src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80" alt="Алматы — Дубай">
+          <img class="card__img" src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=900&q=80" alt="">
           <div class="card__content">
             <h3 class="card__title">Алматы — Дубай</h3>
-            <p class="card__text">Специальные предложения и удобные пересадки. Старт от 85 000 ₸</p>
+            <p class="card__text">Спецпредложения, пересадки. От 85 000 ₸</p>
           </div>
         </article>
         <article class="card">
-          <img class="card__img" src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Алматы — Нью-Йорк">
+          <img class="card__img" src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="">
           <div class="card__content">
             <h3 class="card__title">Алматы — Нью-Йорк</h3>
-            <p class="card__text">Комфортные перелёты, специальные цены при раннем бронировании.</p>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__img" src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=900&q=80" alt="Астана — Париж">
-          <div class="card__content">
-            <h3 class="card__title">Астана — Париж</h3>
-            <p class="card__text">Романтика и культура — выгодные предложения в выбранные даты.</p>
+            <p class="card__text">Специальные цены при раннем бронировании</p>
           </div>
         </article>
       </div>
     </section>
 
     <!-- COLUMNS -->
-    <section class="section" aria-label="Основной контент">
+    <section class="section">
       <div class="columns">
         <div class="columns__col">
           <div class="panel">
             <h3>Предложения <span class="badge">новые</span></h3>
             <ul>
-              <li>Астана → Париж: весенний тариф</li>
-              <li>Алматы → Дубай: спеццена до 31.10</li>
-              <li>Алматы → Нью-Йорк: раннее бронирование</li>
-              <li>Астана → Сеул: промо-пакет baggage+</li>
+              <li>Астана → Париж</li>
+              <li>Алматы → Дубай</li>
             </ul>
           </div>
         </div>
@@ -246,40 +119,22 @@
           <div class="panel">
             <h3>Новости</h3>
             <ul>
-              <li>Открыт доп. рейс на зимний период</li>
-              <li>Обновлены правила перевозки багажа</li>
-              <li>Лаундж-программа: апгрейд статусов</li>
-              <li>Партнёрские мили: 2× до конца месяца</li>
+              <li>Доп. рейс на зиму</li>
+              <li>Обновлены правила багажа</li>
             </ul>
           </div>
         </div>
         <div class="columns__col">
           <div class="panel">
             <h3>О компании</h3>
-            <p>Мы предлагаем удобные маршруты и прозрачные тарифы. Наша цель — обеспечить комфортное путешествие с момента выбора билета до посадки на борт.</p>
-            <p class="search__tiny">Поддержка 24/7 · Безопасные платежи · Программы лояльности</p>
+            <p>Мы предлагаем удобные маршруты и прозрачные тарифы.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer">© 2025 Fly Emirates — демо-версия сайта. Все права защищены.</footer>
+    <footer class="footer">© 2025 Fly Emirates. Все права защищены.</footer>
   </div>
-
-  <script>
-    (function(){
-      const pad=n=>String(n).padStart(2,'0');
-      const d=new Date();
-      const today=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-      const depart=document.getElementById('depart');
-      const ret=document.getElementById('return');
-      if(depart&&!depart.value) depart.value=today;
-      if(ret&&!ret.value){
-        const d2=new Date(Date.now()+86400000*7);
-        ret.value=`${d2.getFullYear()}-${pad(d2.getMonth()+1)}-${pad(d2.getDate())}`;
-      }
-    })();
-  </script>
 </body>
 </html>
