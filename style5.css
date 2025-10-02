@@ -1,0 +1,10 @@
+/* Адаптив */
+@media (max-width: 980px) {
+  .card { flex: 1 1 calc(50% - 16px); }
+  .columns__col { flex: 1 1 calc(50% - 20px); }
+}
+@media (max-width: 560px) {
+  .card { flex: 1 1 100%; }
+  .columns__col { flex: 1 1 100%; }
+  .search__btn { justify-content: flex-start; }
+}
